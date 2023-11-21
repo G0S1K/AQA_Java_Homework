@@ -2,6 +2,11 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("Task 1: " + (isSumInRange(4, 10) ? "in range" : "out of range"));
+        printStrInLoop("Task 2", 3);
+        printValueStatus(5);
+        System.out.println("Task 4: " + (isNotPositive(4) ? "not positive" : "positive"));
+        System.out.println("Task 5: " + (isLeapYear(2024) ? "leap year" : "not leap year"));
         int[] arrayForTask6 = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0};
         int[] arrayForTask7 = new int[100];
         int[] arrayForTask8 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
@@ -29,9 +34,9 @@ public class Main {
     //task_3
     public static void printValueStatus(int value) {
         if (value >= 0) {
-            System.out.print("It's a positive value");
+            System.out.println("It's a positive value");
         } else {
-            System.out.print("It's a negative value");
+            System.out.println("It's a negative value");
         }
     }
 
@@ -91,7 +96,7 @@ public class Main {
 
     //task_10
     public static int[] getInitArray(int length, int initialValue) {
-        int [] newArray = new int[length];
+        int[] newArray = new int[length];
         Arrays.fill(newArray, initialValue);
         return newArray;
     }
