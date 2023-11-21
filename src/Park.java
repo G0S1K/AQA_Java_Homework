@@ -17,22 +17,34 @@ public class Park {
         System.out.println("Park name: " + this.name);
         for (Attraction attraction: attractions) {
             if (attraction != null) {
-                System.out.println("Name: " + attraction.name +
-                        "\nWorking time: " + attraction.workingTime +
-                        "\nCost: " + attraction.cost + "$");
+                System.out.println("Name: " + attraction.getName() +
+                        "\nWorking time: " + attraction.getWorkingTime() +
+                        "\nCost: " + attraction.getCost() + "$");
             }
         }
     }
 
     public static class Attraction {
-        public String name;
-        public String workingTime;
-        public int cost;
+        private final String name;
+        private final String workingTime;
+        private final int cost;
 
         Attraction(String name, String workingTime, int cost) {
             this.name = name;
             this.workingTime = workingTime;
             this.cost = cost;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getCost() {
+            return cost;
+        }
+
+        public String getWorkingTime() {
+            return workingTime;
         }
     }
 }
