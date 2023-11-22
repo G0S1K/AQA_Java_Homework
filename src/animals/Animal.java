@@ -6,7 +6,7 @@ public class Animal {
     protected int runLimit;
     protected int swimLimit;
 
-    public static int countAnimalInstance;
+    private static int countAnimalInstance;
 
     public Animal(String name, int age, int runLimit, int swimLimit) {
         this.name = name;
@@ -14,6 +14,10 @@ public class Animal {
         this.runLimit = runLimit;
         this.swimLimit = swimLimit;
         countAnimalInstance++;
+    }
+
+    public static int getCountAnimalInstance() {
+        return countAnimalInstance;
     }
 
     public void run(int distance) {
