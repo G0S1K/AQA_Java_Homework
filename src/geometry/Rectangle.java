@@ -33,7 +33,7 @@ public class Rectangle implements ShapeCharacteristics, GeometricCalculations {
 
     @Override
     public double getPerimeter() {
-        return 2 * (length * width);
+        return 2 * (length + width);
     }
 
     @Override
