@@ -6,14 +6,16 @@ public class Main {
         animal.run(100);
 
         Plate plate = new Plate(30);
+        System.out.println("Count of food on the plate: " + plate.getCountOfFood());
 
         Dog dog = new Dog("Lenich", 10);
         dog.swim(30);
 
-        Cat[] cats = new Cat[3];
+        Cat[] cats = new Cat[4];
         cats[0] = new Cat("Barsik", 10, 11);
         cats[1] = new Cat("Lisa", 8, 5);
-        cats[2] = new Cat("Barbos", 4, 6);
+        cats[2] = new Cat("Klavik", 14, 30);
+        cats[3] = new Cat("Barbos", 4, 6);
 
         System.out.println("Count cats: " + Cat.getCountCatInstance());
         System.out.println("Count dogs: " + Dog.getCountDogInstance());
@@ -23,6 +25,7 @@ public class Main {
 
         for (Cat cat : cats) {
             if (plate.eatingFromPlate(cat.getCountOfEat())) cat.eating();
+            else System.out.println(cat.getName() + " cant eat form this plate. He needs " + cat.getCountOfEat());
         }
 
         System.out.println("Count of food on the plate: " + plate.getCountOfFood());

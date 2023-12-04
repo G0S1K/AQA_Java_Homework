@@ -12,6 +12,7 @@ public class Cat extends Animal {
         countCatInstance++;
     }
 
+
     public static int getCountCatInstance() {
         return countCatInstance;
     }

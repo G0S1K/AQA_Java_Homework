@@ -20,6 +20,10 @@ public class Animal {
         return countAnimalInstance;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void run(int distance) {
         if (distance < this.runLimit) System.out.printf("%s ran %d meters\n", this.name, distance);
         else System.out.println("This animal can't run that many meters");
