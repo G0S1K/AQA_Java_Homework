@@ -22,7 +22,7 @@ public class Main {
         System.out.println("Compare box 1 and box 3: " + box1.compare(box3));
 
         box1.addItemsFromBox(box2);
-        System.out.println("After insertion: " + box1.getBox());
+        System.out.println("After insertion: " + box1.getBox().size());
 
 
     }
