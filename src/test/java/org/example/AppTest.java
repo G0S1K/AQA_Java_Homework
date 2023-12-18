@@ -2,6 +2,9 @@ package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,36 +28,34 @@ public class AppTest
         WebElement cookieAccept = driver.findElement(
                 By.xpath("//button[@class='btn btn_black cookie__ok']"));
         cookieAccept.click();
-    };
-    @Test
+    }
+
+
+    @ParameterizedTest
+    @CsvSource({
+            "pay-connection, phone, Номер телефона",
+            "pay-internet, phone, Номер абонента",
+            "pay-instalment, score, Номер счета на 44",
+            "pay-arrears, score, Номер счета на 2073"
+    })
     @Order(1)
-    void testNameOfBlock() {
-        WebElement nameOfBlock = driver.findElement(By.xpath("//div[@class='pay__wrapper']//h2"));
-        Assertions.assertEquals(nameOfBlock.getAttribute("textContent"), "Онлайн пополнение без комиссии",
-                "Name is empty");
+    void testCheckPlaceholderOnCommunication(String select, String firstInput, String fistPlaceholder) {
+        WebElement phoneInput = driver.findElement(By.cssSelector("form#" + select + ">div>input." + firstInput));
+        Assertions.assertEquals(phoneInput.getAttribute("placeholder"), fistPlaceholder,
+                "Wrong placeholder");
+
+        WebElement totalInput = driver.findElement(By.cssSelector("form#pay-connection>div>input.total_rub"));
+        Assertions.assertEquals(totalInput.getAttribute("placeholder"), "Сумма",
+                "Wrong placeholder");
+
+        WebElement emailInput = driver.findElement(By.cssSelector("form#pay-connection>div>input.email"));
+        Assertions.assertEquals(emailInput.getAttribute("placeholder"), "E-mail для отправки чека",
+                "Wrong placeholder");
     }
 
     @Test
     @Order(2)
     void testCheckForSystems() {
-        WebElement paySystems = driver.findElement(By.xpath("//div[@class='pay__partners']//ul"));
-        Assertions.assertNotEquals(0, Integer.parseInt(paySystems.getAttribute("childElementCount")),
-                "There are no paysystems.");
-    }
-
-    @Test
-    @Order(3)
-    void testLink() {
-        WebElement link = driver.findElement(By.xpath("//div[@class='pay__wrapper']//a"));
-        link.click();
-        Assertions.assertEquals("https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/",
-                driver.getCurrentUrl(), "This is wrong link");
-    }
-
-    @Test
-    @Order(4)
-    void testForm() throws InterruptedException {
-        driver.get("https://www.mts.by/");
         WebElement phoneInput = driver.findElement(
                 By.xpath("//form[@id='pay-connection']//div//input[@class='phone']"));
         phoneInput.sendKeys("297777777");
@@ -67,8 +68,37 @@ public class AppTest
         WebElement button = driver.findElement(
                 By.xpath("//form[@id='pay-connection']//button"));
         button.click();
-    }
 
+        driver.switchTo().frame(driver.findElement(By.cssSelector("iframe.bepaid-iframe")));
+        Assertions.assertEquals("10.00 BYN", driver.findElement(By.cssSelector("p.header__payment-amount"))
+                .getAttribute("innerText"));
+        Assertions.assertEquals("Оплатить 10.00 BYN", driver.findElement(By.cssSelector("button.colored.disabled.ng-star-inserted"))
+                .getAttribute("innerText"));
+
+        Assertions.assertEquals("Оплата: Услуги связи Номер:375297777777", driver.findElement(By.cssSelector("p.header__payment-info"))
+                .getAttribute("innerText"));
+
+        WebElement paySystems = driver.findElement(By.cssSelector("div.cards-brands.cards-brands__container"));
+        Assertions.assertNotEquals(0, Integer.parseInt(paySystems.getAttribute("childElementCount")));
+
+        WebElement cardNumberInput = driver.findElement(By.cssSelector("label.ng-tns-c47-1.ng-star-inserted"));
+        Assertions.assertEquals(cardNumberInput.getAttribute("innerText"), "Номер карты",
+                "Wrong placeholder");
+
+        WebElement dateInput = driver.findElement(By.cssSelector("label.ng-tns-c47-4.ng-star-inserted"));
+        Assertions.assertEquals(dateInput.getAttribute("innerText"), "Срок действия",
+                "Wrong placeholder");
+
+        WebElement cvcInput = driver.findElement(By.cssSelector("label.ng-tns-c47-5.ng-star-inserted"));
+        Assertions.assertEquals(cvcInput.getAttribute("innerText"), "CVC",
+                "Wrong placeholder");
+
+        WebElement nameInput = driver.findElement(By.cssSelector("label.ng-tns-c47-3.ng-star-inserted"));
+        Assertions.assertEquals(nameInput.getAttribute("innerText"), "Имя держателя (как на карте)",
+                "Wrong placeholder");
+
+        driver.switchTo().defaultContent();
+    }
     @AfterAll
     public static void tearDown(){
         driver.close();
