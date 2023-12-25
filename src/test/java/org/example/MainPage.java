@@ -17,7 +17,7 @@ public class MainPage extends BasePage{
                 By.xpath(".//a[contains(@class, 'product-card__add-basket')]"));
         itemButton.click();
 
-        String price = item.findElement(By.xpath(".//ins[@class = 'price__lower-price']"))
+        String price = item.findElement(By.cssSelector(".price__lower-price"))
                 .getAttribute("innerText");
         String brand = item.findElement(By.xpath(".//span[@class = 'product-card__brand']"))
                 .getAttribute("innerText");
