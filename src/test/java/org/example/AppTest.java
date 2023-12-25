@@ -15,10 +15,10 @@ public class AppTest {
     @Test
     @DisplayName("Test with positive numbers")
     void testWithPositiveNumbers() {
-        assertEquals(1,App.factorial(1));
-        assertEquals(1,App.factorial(0));
-        assertEquals(120,App.factorial(5));
-        assertEquals(362880,App.factorial(9));
+        assertEquals(1, App.factorial(1));
+        assertEquals(1, App.factorial(0));
+        assertEquals(120, App.factorial(5));
+        assertEquals(362880, App.factorial(9));
     }
 
 
