@@ -1,6 +1,10 @@
 package org.example;
 
 import io.appium.java_client.android.AndroidDriver;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import jdk.jfr.Description;
 import org.junit.jupiter.api.*;
 
 public class CalculatorTest{
@@ -14,6 +18,10 @@ public class CalculatorTest{
     }
 
     @Test
+    @DisplayName("Check sum with two numbers")
+    @Description("In this test method calculator click on two numbers and check addition result")
+    @Owner("Korotkevich Gleb")
+    @Severity(SeverityLevel.NORMAL)
     public void checkSum() {
         String result = mainScreen
                 .clickToDigit("8")
@@ -26,6 +34,10 @@ public class CalculatorTest{
     }
 
     @Test
+    @DisplayName("Check subtraction with two numbers")
+    @Description("In this test method calculator click on two numbers and check subtraction result")
+    @Owner("Korotkevich Gleb")
+    @Severity(SeverityLevel.NORMAL)
     public void checkSub() {
         String result = mainScreen
                 .clickToDigit("8")
@@ -38,6 +50,10 @@ public class CalculatorTest{
     }
 
     @Test
+    @DisplayName("Check multiplication with two numbers")
+    @Description("In this test method calculator click on two numbers and check multiplication result")
+    @Owner("Korotkevich Gleb")
+    @Severity(SeverityLevel.NORMAL)
     public void checkMul() {
         String result = mainScreen
                 .clickToDigit("8")
@@ -50,6 +66,10 @@ public class CalculatorTest{
     }
 
     @Test
+    @DisplayName("Check division with two numbers")
+    @Description("In this test method calculator click on two numbers and check division result")
+    @Owner("Korotkevich Gleb")
+    @Severity(SeverityLevel.NORMAL)
     public void checkDiv() {
         String result = mainScreen
                 .clickToDigit("4")
