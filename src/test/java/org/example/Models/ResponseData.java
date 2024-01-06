@@ -10,13 +10,13 @@ public class ResponseData {
 
     private String data;
 
-    private Files files;
+    private Args files;
 
-    private Form form;
+    private Args form;
 
     private Headers headers;
 
     private String url;
 
-    private JsonData json;
+    private Args json;
 }

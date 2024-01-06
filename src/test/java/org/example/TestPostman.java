@@ -145,7 +145,8 @@ public class TestPostman {
         Assertions.assertEquals(responseData.getHeaders().getXForwardedPort(), "443");
         Assertions.assertEquals(responseData.getHeaders().getHost(), "postman-echo.com");
         Assertions.assertNotNull(responseData.getHeaders().getXAmznTraceId());
-        Assertions.assertEquals(responseData.getHeaders().getUserAgent(), "Apache-HttpClient/4.5.13 (Java/21.0.1)");
+        Assertions.assertEquals(responseData.getHeaders().getUserAgent(), "Apache-HttpClient/4.5.13 (Java/" +
+                System.getProperty("java.version") + ")");
         Assertions.assertEquals(responseData.getHeaders().getAccept(), "*/*");
         Assertions.assertEquals(responseData.getHeaders().getAcceptEncoding(), "gzip,deflate");
         Assertions.assertEquals(responseData.getHeaders().getContentType(), contentType);
